@@ -1,0 +1,23 @@
+name: Cache Example CI
+
+on:
+  workflow_dispatch: # Manual trigger
+  push: # Optional - runs on every push
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: prime-cache-c61cb16
+        id: cache-step
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/example
+          key: cache-c61cb16
+
+      - name: Show cache result
+        run: echo "Cache result: ${{ steps.cache-step.outputs.cache-hit }}"
