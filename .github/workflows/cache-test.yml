@@ -2,7 +2,7 @@ name: Cache Example CI
 
 on:
   workflow_dispatch: # Manual trigger
-  push: # Optional - runs on every push
+  push:
 
 jobs:
   cache-job:
@@ -13,11 +13,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: prime-cache-c61cb16
-        id: cache-step
+        id: prime-cache-c61cb16  # ✅ added id field here
         uses: actions/cache@v4
         with:
           path: ~/.cache/example
           key: cache-c61cb16
 
       - name: Show cache result
-        run: echo "Cache result: ${{ steps.cache-step.outputs.cache-hit }}"
+        run: echo "Cache result: ${{ steps.prime-cache-c61cb16.outputs.cache-hit }}"
